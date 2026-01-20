@@ -27,6 +27,7 @@ class CLI:
             return None
 
         assistant_streaming = False
+        final_response: str | None = None
 
         async for event in self.agent.run(message):
             if event.type == AgentEventType.TEXT_DELTA:
@@ -41,6 +42,10 @@ class CLI:
                 if assistant_streaming:
                     self.tui.end_assistant()
                     assistant_streaming = False
+
+            elif event.type == AgentEventType.AGENT_ERROR:
+                error = event.data.get("error", "Unknown error")
+                console.print(f"\n[error]Error: {error}[/error]")
 
         return final_response
 

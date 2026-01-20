@@ -51,7 +51,7 @@ class TUI:
 
     def begin_assistant(self) -> None:
         self.console.print()
-        self.console.print(Rule(Text("Assistant", style="assitant")))
+        self.console.print(Rule(Text("Assistant", style="assistant")))
         self._assistant_stream_open = True
 
     def end_assistant(self) -> None:
